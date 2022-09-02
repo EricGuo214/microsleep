@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "msj-tutor": "msj-tutor",
+    "default": "msj-tutor",
+    "microsleep": "microsleep-67"
+  },
+  "targets": {
+    "msj-tutor": {
+      "hosting": {
+        "missiontutoring": [
+          "missiontutoring"
+        ],
+        "stemsuccesss": [
+          "stemsuccesss"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

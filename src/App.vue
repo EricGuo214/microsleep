@@ -1,0 +1,149 @@
+<template>
+  <v-app>
+    <v-app-bar app color="#2bbafc" dark>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        Microsleep
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+      <v-menu offset-y v-if="user">
+        <template v-slot:activator="{ on }">
+          <v-btn color="#027df0" dark v-on="on">{{ user.email }}</v-btn>
+        </template>
+        <v-list>
+          <v-list-item to="/profile">
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="onSignout">
+            <v-list-item-title>Sign out</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <v-btn v-else to="/SignIn">Get Started</v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app temporary>
+      <v-list nav dense>
+        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
+          <v-list-item to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/ApplyToBeHost">
+            <v-list-item-icon>
+              <v-icon>mdi-school</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Apply to Host</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/ApplyForAHost">
+            <v-list-item-icon>
+              <v-icon>mdi-account-search</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Apply for a Host</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/OurPartners">
+            <v-list-item-icon>
+              <v-icon>mdi-book-open-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Our Partners</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/SearchHosts">
+            <v-list-item-icon>
+              <v-icon>mdi-message-question</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Question Forum</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item to="/Inbox">
+            <v-list-item-icon>
+              <v-icon>mdi-email</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Inbox</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/Admin" v-if="isAdmine()">
+            <v-list-item-icon>
+              <v-icon>mdi-head-cog</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Admin</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/ContactUs">
+            <v-list-item-icon>
+              <v-icon>mdi-account-supervisor</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Contact Us</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import firebase from "firebase";
+
+export default {
+  data() {
+    return {
+      drawer: false,
+      group: null,
+      user: null,
+      isAdmin: false,
+      admins: [],
+    };
+  },
+  created() {
+    firebase
+      .firestore()
+      .collection("Admins")
+      .get()
+      .then((adm) => {
+        adm.forEach((doc) => {
+          this.admins.push(doc.id);
+        });
+        console.log(this.admins);
+      });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      this.user = user;
+      if (firebase.auth().currentUser != null) {
+        user.getIdTokenResult().then((idTokenResult) => {
+          // console.log(idTokenResult.claims)
+          if (idTokenResult.claims.admin) {
+            this.isAdmin = true;
+          }
+        });
+      }
+    });
+  },
+  methods: {
+    onSignout(e) {
+      e.stopPropagation();
+      firebase.auth().signOut();
+      this.isAdmin = false;
+    },
+
+    isAdmine() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          console.log(firebase.auth().currentUser.email);
+          console.log(this.admins.includes(firebase.auth().currentUser.email));
+
+          return this.admins.includes(firebase.auth().currentUser.email);
+        }
+      });
+    },
+  },
+};
+</script>
