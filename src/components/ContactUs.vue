@@ -67,14 +67,24 @@ export default {
     return {
       stemTeam: [
         {
-          image: require("./Pictures/ericPic.jpeg"),
+          image: require("./Pictures/IMG_1398 (2).jpg"),
           title: "Eric Guo",
-          text: "Nice to meet you! I created and led this website to facilitate the complexity of student housing and expand the ease of access for university housing and connectivity.  My hobbies are coding, dancing, and playing the piano!",
+          text: "I created and led this website to help university students find safe and convenient housing. After being homeless for two nights during university orientation, I realized student housing was a massive issue at many schools.I hope to provide a solution for low income and underrepresented communities. My hobbies are coding, singing, and going on runs.",
         },
         {
           image: require("./Pictures/david.jpg"),
           title: "David Guo",
-          text: "Nice to meet you! I created and led this website to facilitate the complexity of organization and expand the ease of access for academic support.  My hobbies are coding, dancing, and playing the piano!",
+          text: "Nice to meet you! I helped create this website to facilitate the complexity of organization and expand the ease of access for housing support. My hobbies are coding, dancing, and playing the piano!",
+        },
+        {
+          image: require("./Pictures/IMG_4347.jpg"),
+          title: "Victor Diniz",
+          text: "",
+        },
+        {
+          image: require("./Pictures/IMG_4345.jpg"),
+          title: "Anthony Yang",
+          text: "",
         },
       ],
       website: [

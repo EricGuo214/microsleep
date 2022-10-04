@@ -1,78 +1,132 @@
 <template>
+
   <body>
     <h1>Your Profile</h1>
-    <v-col
-      v-if="this.myClasses.length >= 1"
-      cols="12"
-      sm="4"
-      class="justify-center"
-    >
+    <v-col v-if="this.host.selectedTimes.length >= 1" cols="12" sm="4" class="justify-center">
       <v-card max-width="450" outlined>
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="text-h5 mb-1">
-              {{ this.tutor.fName }} {{ this.tutor.lName }}
+              {{ this.host.fName }} {{ this.host.lName }}
             </v-list-item-title>
-            <v-list-item-subtitle
-              ><h3>{{ this.tutor.desc }}</h3></v-list-item-subtitle
-            >
+            <v-list-item-subtitle>
+              <h3>{{ this.host.desc }}</h3>
+            </v-list-item-subtitle>
           </v-list-item-content>
+
           <v-list-item-avatar tile size="100" color="grey">
-            <v-img :src="this.tutor.photoURL"> </v-img
-          ></v-list-item-avatar>
+            <v-img :src="this.host.photoURL"> </v-img>
+          </v-list-item-avatar>
         </v-list-item>
         <v-card-text>
-          <h4>Qualified classes:</h4>
-          <v-list-item v-for="(cls, i) in this.myClasses" :key="i">
-            <v-list-item-content v-text="cls"></v-list-item-content>
+          <h4>School:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.host.school}}
+            </v-list-item-content>
+          </v-list-item>
+          <h4>Phone Number:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.host.phonenumber}}
+            </v-list-item-content>
+          </v-list-item>
+          <h4>Gender:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.host.gender}}
+            </v-list-item-content>
           </v-list-item>
 
-          <h4>Availible spaces:</h4>
-          <div class="primary--text mb-2" bold>{{ this.tutor.maxTut }}</div>
+
+          <h4>Housing Type:</h4>
+          <v-list-item v-for="(cls, i) in host.housingTypes" :key="i">
+            <v-list-item-content v-text="cls.name"></v-list-item-content>
+          </v-list-item>
+
+
+          <h4>Available Times:</h4>
+          <v-list-item v-for="(cls, i) in this.host.selectedTimes" :key="i">
+            <v-list-item-content v-text="cls.name"></v-list-item-content>
+          </v-list-item>
+
+          <h4>Maximum Number of Guests:</h4>
+          <div class="primary--text mb-2" bold>{{ this.host.maxTut }}</div>
+
+          <h4>Facebook Username:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.host.facebook}}
+            </v-list-item-content>
+          </v-list-item>
+
         </v-card-text>
       </v-card>
       <br />
       <div class="my-2">
-        <v-btn color="primary" to="/UpdateTutor">
-          Update Tutor Information
+        <v-btn color="primary" to="/UpdateHost">
+          Update Host Information
         </v-btn>
       </div>
       <br />
       <br />
     </v-col>
 
-    <v-col
-      v-if="this.tuteeClasses.length >= 1"
-      cols="12"
-      sm="4"
-      class="justify-center"
-    >
+    <v-col v-if="this.guest.selectedTimes.length >= 1" cols="12" sm="4" class="justify-center">
       <v-card max-width="450" outlined>
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="text-h5 mb-1">
-              {{ this.tutee.name }}
+              {{ this.guest.name }}
             </v-list-item-title>
-            <v-list-item-subtitle
-              ><h3>{{ this.tutee.notes }}</h3></v-list-item-subtitle
-            >
+            <v-list-item-subtitle>
+              <h3>{{ this.guest.notes }}</h3>
+            </v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-avatar tile size="100" color="grey">
-            <v-img :src="this.tutee.photoURL"> </v-img
-          ></v-list-item-avatar>
+            <v-img :src="this.guest.photoURL"> </v-img>
+          </v-list-item-avatar>
         </v-list-item>
+
         <v-card-text>
-          <h4>Registered classes:</h4>
-          <v-list-item v-for="(cls, i) in this.tuteeClasses" :key="i">
-            <v-list-item-content v-text="cls"></v-list-item-content>
+          <h4>Phone Number:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.guest.phonenumber}}
+            </v-list-item-content>
           </v-list-item>
+
+          <h4>Housing Type:</h4>
+          <v-list-item v-for="(cls, i) in guest.housingTypes" :key="i">
+            <v-list-item-content v-text="cls.name"></v-list-item-content>
+          </v-list-item>
+
+          <h4>Stay Time:</h4>
+          <v-list-item v-for="(cls, i) in guest.selectedTimes" :key="i">
+            <v-list-item-content v-text="cls.name"></v-list-item-content>
+          </v-list-item>
+
+          <h4>Staying at Zip Code / School:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.guest.address}}
+            </v-list-item-content>
+          </v-list-item>
+
+          <h4>Facebook:</h4>
+          <v-list-item>
+            <v-list-item-content>
+              {{this.guest.facebook}}
+            </v-list-item-content>
+          </v-list-item>
+
         </v-card-text>
       </v-card>
       <br />
       <div class="my-2">
-        <v-btn color="primary" to="/UpdateTutee">
-          Update Tutee Information
+        <v-btn color="primary" to="/UpdateGuest">
+          Update Guest Information
         </v-btn>
       </div>
       <br />
@@ -85,10 +139,12 @@ import firebase from "firebase";
 
 export default {
   data: () => ({
-    myClasses: [],
-    tutor: "",
-    tutee: "",
-    tuteeClasses: []
+    hostTimes: [],
+    hostHousingTypes: [],
+    host: "",
+    guest: "",
+    guestTimes: [],
+    guestHousingTypes: [],
   }),
 
   created() {
@@ -96,35 +152,53 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const userEmail = firebase.auth().currentUser.email;
-        db.collection("OurTutors")
+        db.collection("Hosts")
           .doc(userEmail)
           .get()
           .then(doc => {
-            this.tutor = doc.data();
+            this.host = doc.data();
           });
 
-        db.collection("OurTutors")
+        // db.collection("Hosts")
+        //   .doc(userEmail)
+        //   .collection("Available Times")
+        //   .onSnapshot(querySnapshot => {
+        //     querySnapshot.forEach(doc => {
+        //       this.hostTimes.push(doc.data().name);
+        //     });
+        //   });
+
+        // db.collection("Hosts")
+        //   .doc(userEmail)
+        //   .collection("Housing Type")
+        //   .onSnapshot(querySnapshot => {
+        //     querySnapshot.forEach(doc => {
+        //       this.hostHousingTypes.push(doc.data().name);
+        //     });
+        //   });
+
+        db.collection("Guests")
           .doc(userEmail)
-          .collection("Classes")
+          .get()
+          .then(doc => {
+            this.guest = doc.data();
+          });
+
+        db.collection("Guests")
+          .doc(userEmail)
+          .collection("Preferred Times")
           .onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
-              this.myClasses.push(doc.data().name);
+              this.guestTimes.push(doc.data().name);
             });
           });
 
-        db.collection("Tutees")
+          db.collection("Guests")
           .doc(userEmail)
-          .get()
-          .then(doc => {
-            this.tutee = doc.data();
-          });
-
-        db.collection("Tutees")
-          .doc(userEmail)
-          .collection("Classes")
+          .collection("Housing Types")
           .onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
-              this.tuteeClasses.push(doc.data().name);
+              this.guestHousingTypes.push(doc.data().name);
             });
           });
       }
@@ -137,9 +211,11 @@ export default {
   text-align: center;
   margin: auto;
 }
+
 .color {
   text-color: #000000;
 }
+
 .pad {
   left-margin: 300px;
   right-margin: 300px;

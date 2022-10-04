@@ -46,12 +46,12 @@
             <v-list-item-title>Apply for a Host</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/OurPartners">
+          <!-- <v-list-item to="/OurPartners">
             <v-list-item-icon>
               <v-icon>mdi-book-open-variant</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Our Partners</v-list-item-title>
-          </v-list-item>
+          </v-list-item> -->
 
           <v-list-item to="/SearchHosts">
             <v-list-item-icon>

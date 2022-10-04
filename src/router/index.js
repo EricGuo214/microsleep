@@ -34,16 +34,16 @@ const routes = [
     },
   },
   {
-    path: "/UpdateTutor",
-    name: "UpdateTutor",
+    path: "/UpdateHost",
+    name: "UpdateHost",
     component: UpdateTutor,
     meta: {
       auth: true,
     },
   },
   {
-    path: "/UpdateTutee",
-    name: "UpdateTutee",
+    path: "/UpdateGuest",
+    name: "UpdateGuest",
     component: UpdateTutee,
     meta: {
       auth: true,

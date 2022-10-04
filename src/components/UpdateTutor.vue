@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-center display-2 text-accent-3">
-      Edit Tutor
+      Edit Hosting Information
     </h1>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-container style="width: 50%">
@@ -34,11 +34,11 @@
         <v-row align="center" justify="center">
           <v-col md="5">
             <v-autocomplete
-              v-model="info.grade"
+              v-model="info.school"
               dense
               :rules="[(v) => !!v || 'This field is required']"
-              :items="grades"
-              label="Select Grade"
+              :items="schools"
+              label="Select School"
               outlined
             ></v-autocomplete>
           </v-col>
@@ -64,7 +64,7 @@
                 (v) => !!v || 'This field is required',
                 (v) => v < 10 || 'Must be less than 10',
               ]"
-              label="Maxiumum students"
+              label="Maxiumum Guests"
               outlined
               required
             ></v-text-field>
@@ -84,11 +84,27 @@
         <v-row align="center" justify="center">
           <v-text-field
             v-model="info.desc"
-            label="Enter a short description for tutees to see"
+            label="Enter a short description for potential guests to see.
+            Please includ Address and Zip Code"
             :rules="[(v) => !!v || 'This field is required']"
           >
           </v-text-field>
         </v-row>
+
+
+        <v-row align="center" justify="center">
+          <v-select v-model="info.housingTypes" dense :items="housingTypes" item-text="name" :rules="[required]"
+            label="What type of housing do you offer?" multiple chips required return-object>
+          </v-select>
+        </v-row>
+
+        <v-row align="center" justify="center">
+          <v-select v-model="info.selectedTimes" dense :items="times" item-text="name" :rules="[required]"
+            label="What times are you available?" multiple chips required return-object>
+          </v-select>
+        </v-row>
+
+
         <!-- <v-row align="center" justify="center">
           <v-select
             return-object
@@ -126,13 +142,14 @@
             :label="cls.name + ' Sem 2 Grade'"
           ></v-select>
         </v-row> -->
+        
+        <p></p>
         <v-alert dense border="left" type="warning">
-          Classes <strong>cannot </strong> be changed if you paired are with a
-          tutee. Please contact us at msjstemsuccess@gmail.com to remove or add
-          classes
+          Information <strong>cannot </strong> be changed if you have already been paired with a
+          guest. Please contact us at eric.w.guo@microsleep.org to remove or add
+          bookings. 
         </v-alert>
 
-        <br />
 
         <h2>Contact Information</h2>
         <v-list>
@@ -196,55 +213,68 @@ export default {
     valid: true,
     info: {},
 
-    grades: ["9", "10", "11", "12"],
-    genders: ["Male", "Female", "Other"],
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
-    academicGrades: ["A", "B", "C", "D", "F"],
+
+
+    firstName: "",
+    lastName: "",
+    school: null,
+    schools: ["USC", "UCLA", "UCSD", "UC Berkeley", "UCI", "UOP", "SCU", "UMD", ],
+    phonenumber: null,
     selectedClasses: [],
+    gender: "",
+    genders: ["Male", "Female", "Other"],
+    maxTut: null,
+    desc: "",
+    facebook: "",
+    instagram: "",
 
-    classes: [
-      { header: "Sciences" },
+    housingTypes: [
+      { header: "House" },
       { divider: true },
-      { name: "AP Biology" },
-      { name: "AP Chemistry" },
-      { name: "AP Physics 1" },
-      { name: "AP Physics C" },
-      { name: "CP Physics" },
-      { name: "AP Environmental Science" },
-      { name: "Physics in the Universe" },
-      { name: "Biology" },
-      { name: "Chemistry" },
-      { name: "Living Earth" },
-      { name: "Anatomy Physiology" },
-      { name: "Chemical Technology" },
+      { name: "House - Single with Bed" },
+      { name: "House - Single with Couch" },
+      { name: "House - Double with Bed" },
+      { name: "House - Double with Couch" },
+      { name: "House - Triple with Bed" },
+      { name: "House - Triple with Couch" },
       { divider: true },
 
-      { header: "Maths" },
-      { divider: true },
-      { name: "AP Statistics" },
-      { name: "AP Computer Science A" },
-      { name: "AP Calculus AB" },
-      { name: "AP Calculus BC" },
-      { name: "CP Calculus" },
-      { name: "Precalculus" },
-      { name: "Algebra 2 | Trig" },
-      { name: "Algebra 2" },
-      { name: "Trigonometry" },
-      { name: "Geometry" },
-      { name: "Algebra 1" },
-      { name: "Discrete Math" },
-      { name: "Intro to C++" },
-      { name: "Multivariable" },
-      { name: "Linear Algebra" },
+      { header: "Dorm" },
+      { name: "Dorm - Single with Bed" },
+      { name: "Dorm - Single with Couch" },
+      { name: "Dorm - Double with Bed" },
+      { name: "Dorm - Double with Couch" },
+      { name: "Dorm - Triple with Bed" },
+      { name: "Dorm - Triple with Couch" },
+
+      { header: "Apartment" },
+      { name: "Apartment - Single with Bed" },
+      { name: "Apartment - Single with Couch" },
+      { name: "Apartment - Double with Bed" },
+      { name: "Apartment - Double with Couch" },
+      { name: "Apartment - Triple with Bed" },
+      { name: "Apartment - Triple with Couch" },
     ],
+
+    times: [
+      { name: "Monday"},
+      { name: "Tuesday "},
+      { name: "Wednesday"},
+      { name: "Thursday"},
+      { name: "Friday"},
+      { name: "Saturday"},
+      { name: "Sunday"},
+  ],
   }),
+
   created() {
     var db = firebase.firestore();
     const userEmail = firebase.auth().currentUser.email;
-    db.collection("OurTutors")
+    db.collection("Hosts")
       .doc(userEmail)
       .get()
       .then((doc) => {
@@ -261,11 +291,12 @@ export default {
         var db = firebase.firestore();
         const userEmail = firebase.auth().currentUser.email;
         this.info.name = this.info.fName + " " + this.info.lName;
-        db.collection("OurTutors")
+        db.collection("Hosts")
           .doc(userEmail)
-          .update(this.info);
+          .update(this.info).then(()=>{
+            this.$router.push("/profile");
+          });
       }
-      this.$router.push("/OurTutors");
     },
 
     required(value) {

@@ -1,85 +1,60 @@
 <template>
+
   <body>
     <div class="half">
-      <h1>Edit Tutee</h1>
+      <h1>Edit Guest Information</h1>
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
-          v-model="info.name"
-          dense
-          :rules="[(v) => !!v || 'This field is required']"
-          label="Full name"
-          outlined
-          required
-        ></v-text-field>
+        <v-text-field v-model="info.name" dense :rules="[(v) => !!v || 'This field is required']" label="Full name"
+          outlined required></v-text-field>
 
         <v-col>
-          <v-text-field
-            v-model.number="info.phonenumber"
-            type="number"
-            label="Phone Number"
-            :rules="[(v) => !!v || 'This field is required']"
-          >
+          <v-text-field v-model.number="info.phonenumber" type="number" label="Phone Number"
+            :rules="[(v) => !!v || 'This field is required']">
           </v-text-field>
         </v-col>
 
-        <v-select
-          return-object
-          v-model="selectedClasses"
-          dense
-          :items="classes"
-          item-text="name"
-          :rules="[required]"
-          label="Select the classes you need help in"
-          multiple
-          chips
-          required
-        >
+        <v-select return-object v-model="info.housingTypes" dense :items="housingOptions" item-text="name" :rules="[required]"
+          label="Select your preferred housing type" multiple chips required>
         </v-select>
         <br />
-        <v-text-field
-          v-model="info.notes"
-          label="Any preferences or notes for your tutor? (optional)"
-          outlined
-        ></v-text-field>
+
+        <v-select return-object v-model="info.selectedTimes" dense :items="times" item-text="name" :rules="[required]"
+          label="What times do you need to stay?" multiple chips required>
+        </v-select>
+        <br />
+
+        <v-text-field v-model="info.address" :rules="[required]"
+          label="Please enter the Zip Code of the area OR school you'd like to stay at." outlined>
+        </v-text-field>
+
+        <v-text-field v-model="info.notes" label="Any preferences or notes for your host? (optional)" outlined>
+        </v-text-field>
 
         <h2>Contact Information</h2>
         <v-list>
           <v-list-item>
             <v-list-item-avatar>
               <v-avatar size="50px" tile>
-                <img
-                  :src="
-                    `https://cdn.iconscout.com/icon/free/png-256/facebook-logo-2019-1597680-1350125.png`
-                  "
-                  :alt="'facebook logo'"
-                />
+                <img :src="
+                  `https://cdn.iconscout.com/icon/free/png-256/facebook-logo-2019-1597680-1350125.png`
+                " :alt="'facebook logo'" />
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-text-field
-                v-model="info.facebook"
-                :rules="[(v) => !!v || 'This field is required']"
-                label="Facebook Username"
-                required
-              ></v-text-field>
+              <v-text-field v-model="info.facebook" :rules="[(v) => !!v || 'This field is required']"
+                label="Facebook Username" required></v-text-field>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
             <v-list-item-avatar>
               <v-avatar size="50px" tile>
-                <img
-                  :src="
-                    `https://i.pinimg.com/736x/c8/95/2d/c8952d6e421a83d298a219edee783167.jpg`
-                  "
-                  :alt="'instagram logo'"
-                />
+                <img :src="
+                  `https://i.pinimg.com/736x/c8/95/2d/c8952d6e421a83d298a219edee783167.jpg`
+                " :alt="'instagram logo'" />
               </v-avatar>
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-text-field
-                v-model="info.instagram"
-                label="Instagram (optional)"
-              ></v-text-field>
+              <v-text-field v-model="info.instagram" label="Instagram (optional)"></v-text-field>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -101,67 +76,77 @@ export default {
     info: {},
     selectedClasses: [],
     genders: ["Male", "Female", "Other"],
+    housingTypes: "",
+    selectedTimes: "",
 
-    classes: [
-      { header: "Sciences" },
+    housingOptions: [
+      { header: "House" },
       { divider: true },
-      { name: "AP Biology" },
-      { name: "AP Chemistry" },
-
-      { name: "AP Physics 1" },
-      { name: "AP Physics C" },
-      { name: "CP Physics" },
-      { name: "Physics in the Universe" },
-      { name: "Biology" },
-      { name: "Chemistry" },
-      { name: "Living Earth" },
+      { name: "House - Single with Bed" },
+      { name: "House - Single with Couch" },
+      { name: "House - Double with Bed" },
+      { name: "House - Double with Couch" },
+      { name: "House - Triple with Bed" },
+      { name: "House - Triple with Couch" },
       { divider: true },
 
-      { header: "Maths" },
-      { divider: true },
-      { name: "AP Statistics" },
-      { name: "AP Computer Science A" },
-      { name: "AP Calculus AB" },
-      { name: "AP Calculus BC" },
-      { name: "CP Calculus" },
-      { name: "Precalculus" },
-      { name: "Algebra 2/Trig" },
-      { name: "Algebra 2" },
-      { name: "Trigonometry" },
-      { name: "Geometry" },
-      { name: "Trig" },
-      { name: "Geometry" },
+      { header: "Dorm" },
+      { name: "Dorm - Single with Bed" },
+      { name: "Dorm - Single with Couch" },
+      { name: "Dorm - Double with Bed" },
+      { name: "Dorm - Double with Couch" },
+      { name: "Dorm - Triple with Bed" },
+      { name: "Dorm - Triple with Couch" },
+
+      { header: "Apartment" },
+      { name: "Apartment - Single with Bed" },
+      { name: "Apartment - Single with Couch" },
+      { name: "Apartment - Double with Bed" },
+      { name: "Apartment - Double with Couch" },
+      { name: "Apartment - Triple with Bed" },
+      { name: "Apartment - Triple with Couch" },
     ],
+
+    times: [
+      { name: "Monday" },
+      { name: "Tuesday " },
+      { name: "Wednesday" },
+      { name: "Thursday" },
+      { name: "Friday" },
+      { name: "Saturday" },
+      { name: "Sunday" },
+    ]
+
   }),
 
   created() {
     var db = firebase.firestore();
     const userEmail = firebase.auth().currentUser.email;
-    db.collection("Tutees")
+    db.collection("Guests")
       .doc(userEmail)
       .get()
       .then((doc) => {
         this.info = doc.data();
       });
 
-    db.collection("Tutees")
-      .doc(userEmail)
-      .collection("Classes")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.selectedClasses.push(doc.data());
-        });
-        this.selectedClasses.forEach((cls) => {
-          if (cls.p) {
-            this.classes[this.getInd(cls.name)].disabled = true;
-          }
-        });
-      });
+    // db.collection("Guests")
+    //   .doc(userEmail)
+    //   .collection("Classes")
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       this.selectedClasses.push(doc.data());
+    //     });
+    //     this.selectedClasses.forEach((cls) => {
+    //       if (cls.p) {
+    //         this.classes[this.getInd(cls.name)].disabled = true;
+    //       }
+    //     });
+    //   });
   },
 
   methods: {
-    test() {},
+    test() { },
     getInd(n) {
       for (var i = 0; i < this.classes.length; i++) {
         if (this.classes[i].name == n) return i;
@@ -173,41 +158,44 @@ export default {
         var db = firebase.firestore();
         const userEmail = firebase.auth().currentUser.email;
 
-        db.collection("Tutees")
+        db.collection("Guests")
           .doc(userEmail)
-          .set(this.info);
-
-        var batch = db.batch();
-        db.collection("Tutees")
-          .doc(userEmail)
-          .collection("Classes")
-          .where("p", "==", false)
-          .get()
-          .then((res) => {
-            res.forEach((element) => {
-              element.ref.delete();
-            });
+          // .set(this.info);
+          .update(this.info).then(()=>{
+            this.$router.push("/profile");
           })
-          .then(() => {
-            this.selectedClasses.forEach((cls, index, arr) => {
-              var docRef = db
-                .collection("Tutees")
-                .doc(userEmail)
-                .collection("Classes")
-                .doc(cls.name);
 
-              docRef.get().then((doc) => {
-                if (doc.exists) {
-                  console.log("exists");
-                } else {
-                  cls.p = false;
-                  cls.tutor = {};
-                  batch.set(docRef, cls);
-                }
-                if (index == arr.length - 1) batch.commit();
-              });
-            });
-          });
+        // var batch = db.batch();
+        // db.collection("Tutees")
+        //   .doc(userEmail)
+        //   .collection("Classes")
+        //   .where("p", "==", false)
+        //   .get()
+        //   .then((res) => {
+        //     res.forEach((element) => {
+        //       element.ref.delete();
+        //     });
+        //   })
+        //   .then(() => {
+        //     this.selectedClasses.forEach((cls, index, arr) => {
+        //       var docRef = db
+        //         .collection("Tutees")
+        //         .doc(userEmail)
+        //         .collection("Classes")
+        //         .doc(cls.name);
+
+        //       docRef.get().then((doc) => {
+        //         if (doc.exists) {
+        //           console.log("exists");
+        //         } else {
+        //           cls.p = false;
+        //           cls.tutor = {};
+        //           batch.set(docRef, cls);
+        //         }
+        //         if (index == arr.length - 1) batch.commit();
+        //       });
+        //     });
+        //   });
       }
     },
     required(value) {
@@ -219,7 +207,7 @@ export default {
   },
   computed: {
     isValid() {
-      return this.name != "" && this.selectedClasses.length != 0;
+      return this.name != "" && this.housingTypes.length != 0;
     },
   },
 };

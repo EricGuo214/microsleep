@@ -46,12 +46,12 @@
         </v-row>
 
         <v-row align="center" justify="center">
-          <v-text-field v-model="desc" label="Enter a short description for potential guests to see"
+          <v-text-field v-model="desc" label="Enter a short description for potential guests to see. Please include Address and Zip Code"
             :rules="[(v) => !!v || 'This field is required']">
           </v-text-field>
         </v-row>
 
-        <v-row align="center" justify="center">
+        <!-- <v-row align="center" justify="center">
           <v-select v-model="selectedHousingType" dense :items="housingTypes" item-text="name" :rules="[required]"
             label="What type of housing do you offer?" multiple chips required return-object>
           </v-select>
@@ -61,7 +61,20 @@
           <v-select v-model="selectedTimes" dense :items="times" item-text="name" :rules="[required]"
             label="What times are you available?" multiple chips required return-object>
           </v-select>
+        </v-row> -->
+
+        <v-row align="center" justify="center">
+          <v-select v-model="housingTypes" dense :items="housingOptions" item-text="name" :rules="[required]"
+            label="What type of housing do you offer?" multiple chips required return-object>
+          </v-select>
         </v-row>
+
+        <v-row align="center" justify="center">
+          <v-select v-model="selectedTimes" dense :items="times" item-text="name" :rules="[required]"
+            label="What times are you available?" multiple chips required return-object>
+          </v-select>
+        </v-row>
+
         <br />
 
         <v-row v-for="(cls, i) in selectedClasses" :key="i">
@@ -124,6 +137,7 @@ export default {
   data: () => ({
     valid: true,
 
+
     // firstName: "Rithwik",
     // lastName: "Viaudn",
     // grade: "9",
@@ -140,7 +154,7 @@ export default {
     firstName: "",
     lastName: "",
     school: null,
-    schools: ["USC", "UCLA", "UCSD", "UMD"],
+    schools: ["USC", "UCLA", "UCSD", "UC Berkeley", "UCI", "UOP", "SCU", "UMD", ],
     phonenumber: null,
     selectedClasses: [],
     gender: "",
@@ -149,8 +163,10 @@ export default {
     desc: "",
     facebook: "",
     instagram: "",
+    housingTypes: "",
+    selectedTimes: "",
 
-    housingTypes: [
+    housingOptions: [
       { header: "House" },
       { divider: true },
       { name: "House - Single with Bed" },
@@ -189,43 +205,6 @@ export default {
 
     ],
 
-
-    classes: [
-      { header: "Sciences" },
-      { divider: true },
-      { name: "AP Biology" },
-      { name: "AP Chemistry" },
-      { name: "AP Physics 1" },
-      { name: "AP Physics C" },
-      { name: "CP Physics" },
-      { name: "AP Environmental Science" },
-      { name: "Physics in the Universe" },
-      { name: "Biology" },
-      { name: "Chemistry" },
-      { name: "Living Earth" },
-      { name: "Anatomy Physiology" },
-      { name: "Chemical Technology" },
-      { divider: true },
-
-      { header: "Maths" },
-      { divider: true },
-      { name: "AP Statistics" },
-      { name: "AP Computer Science A" },
-      { name: "AP Calculus AB" },
-      { name: "AP Calculus BC" },
-      { name: "CP Calculus" },
-      { name: "Precalculus" },
-      { name: "Algebra 2 | Trig" },
-      { name: "Algebra 2" },
-      { name: "Trigonometry" },
-      { name: "Geometry" },
-      { name: "Algebra 1" },
-      { name: "Discrete Math" },
-      { name: "Intro to C++" },
-      { name: "Multivariable" },
-      { name: "Linear Algebra" },
-    ],
-
     photoURL: null,
 
     emailRules: [
@@ -255,35 +234,37 @@ export default {
             facebook: this.facebook,
             instagram: this.instagram,
             phonenumber: this.phonenumber,
+            housingTypes: this.housingTypes,
+            selectedTimes: this.selectedTimes,
           });
 
-        var batch = db.batch();
-        this.selectedHousingType.forEach((cls) => {
-          var docRef = db
-            .collection("Hosts")
-            .doc(userEmail)
-            .collection("Housing Type")
-            .doc(cls.name);
+        // var batch = db.batch();
+        // this.selectedHousingType.forEach((cls) => {
+        //   var docRef = db
+        //     .collection("Hosts")
+        //     .doc(userEmail)
+        //     .collection("Housing Type")
+        //     .doc(cls.name);
 
-          batch.set(docRef, cls);
-        });
+        //   batch.set(docRef, cls);
+        // });
 
-        this.selectedTimes.forEach((cls) => {
-          var docRef = db
-            .collection("Hosts")
-            .doc(userEmail)
-            .collection("Available Times")
-            .doc(cls.name);
+        // this.selectedTimes.forEach((cls) => {
+        //   var docRef = db
+        //     .collection("Hosts")
+        //     .doc(userEmail)
+        //     .collection("Available Times")
+        //     .doc(cls.name);
 
-          batch.set(docRef, cls);
-        });
+        //   batch.set(docRef, cls);
+        // });
 
-        batch.commit();
+        // batch.commit();
 
         
         
 
-        this.$router.push("/OurPartners");
+        this.$router.push("/profile");
       }
     },
     required(value) {

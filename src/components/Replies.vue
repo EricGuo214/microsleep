@@ -29,6 +29,7 @@
     <v-card
       class="mx-auto"
       max-width="800"
+      height="150px"
       outlined
       v-for="q in replies"
       :key="q.id"
@@ -51,7 +52,7 @@
           >
           </v-text-field>
 
-          <v-list-item-title v-else class="headline mb-1">
+          <v-list-item-title v-else class="text-wrap">
             {{ q.reply }}
           </v-list-item-title>
         </v-list-item-content>

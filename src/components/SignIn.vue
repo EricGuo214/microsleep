@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-center display-2 primary--text text-accent-3">
-      Welcome to STEM Success!
+      Welcome to Microsleep!
     </h1>
     <h3 class="text-center display-2 primary-text text-accent-3">
       Please Sign In

@@ -1,30 +1,22 @@
 <template>
   <v-row no-gutters>
-    <v-img
-      :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-      src="https://savvycollegegirl.com/wp-content/uploads/2019/08/dorm-5.jpg"
-    >
+    <v-img :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+      src="https://savvycollegegirl.com/wp-content/uploads/2019/08/dorm-5.jpg">
       <v-theme-provider root>
         <v-container fill-height>
           <v-row align="center" class="white--text mx-auto" justify="center">
             <v-col class="white--text text-center" cols="12" tag="h1">
-              <span
-                :class="[
-                  $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2',
-                ]"
-                class="font-weight-light"
-              >
+              <span :class="[
+                $vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2',
+              ]" class="font-weight-light">
                 WELCOME TO
               </span>
 
               <br />
 
-              <span
-                :class="[
-                  $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
-                ]"
-                class="font-weight-black"
-              >
+              <span :class="[
+                $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
+              ]" class="font-weight-black">
                 MICROSLEEP
               </span>
             </v-col>
@@ -34,42 +26,20 @@
             <table class="centereds">
               <tr>
                 <td class="pad">
-                  <div
-                    class="fancy-border"
-                    style="background-color: rgba(0, 0, 0, 0.5)"
-                  >
-                    <v-card
-                      align="center"
-                      width="344"
-                      class="mx-auto"
-                      outlined
-                      style="background-color: transparent"
-                    >
+                  <div class="fancy-border" style="background-color: rgba(0, 0, 0, 0.5)">
+                    <v-card align="center" width="344" class="mx-auto" outlined style="background-color: transparent">
                       <v-list-item three-line>
                         <v-list-item-content>
-                          <v-list-item-title
-                            class="text-h5 mb-1"
-                            style="opacity: 1; font-weight: bold; color: white"
-                          >
+                          <v-list-item-title class="text-h5 mb-1" style="opacity: 1; font-weight: bold; color: white">
                             Have an extra bed?
                           </v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
 
-                      <v-row
-                        justify="center"
-                        align="center"
-                        style="padding-bottom: 20px"
-                      >
+                      <v-row justify="center" align="center" style="padding-bottom: 20px">
                         <v-card-actions>
-                          <v-btn
-                            align-center
-                            outlined
-                            text
-                            to="/ApplyToBeHost"
-                            style="color: white"
-                            class="fancy-border isButton"
-                          >
+                          <v-btn align-center outlined text to="/ApplyToBeHost" style="color: white"
+                            class="fancy-border isButton">
                             Apply to be a host
                           </v-btn>
                         </v-card-actions>
@@ -79,42 +49,20 @@
                 </td>
 
                 <td>
-                  <div
-                    class="fancy-border"
-                    style="background-color: rgba(0, 0, 0, 0.5)"
-                  >
-                    <v-card
-                      align="center"
-                      class="mx-auto"
-                      width="344"
-                      outlined
-                      style="background-color: transparent;"
-                    >
+                  <div class="fancy-border" style="background-color: rgba(0, 0, 0, 0.5)">
+                    <v-card align="center" class="mx-auto" width="344" outlined style="background-color: transparent;">
                       <v-list-item three-line>
                         <v-list-item-content>
-                          <v-list-item-title
-                            class="text-h5 mb-1"
-                            style="opacity: 1; font-weight: bold; color: white"
-                          >
+                          <v-list-item-title class="text-h5 mb-1" style="opacity: 1; font-weight: bold; color: white">
                             Need a place to crash?
                           </v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
 
-                      <v-row
-                        justify="center"
-                        align="center"
-                        style="padding-bottom: 20px"
-                      >
+                      <v-row justify="center" align="center" style="padding-bottom: 20px">
                         <v-card-actions>
-                          <v-btn
-                            align-center
-                            outlined
-                            text
-                            to="/OurPartners"
-                            style="color: white"
-                            class="fancy-border isButton"
-                          >
+                          <v-btn align-center outlined text to="/ApplyForAHost" style="color: white"
+                            class="fancy-border isButton">
                             Find a place to stay
                           </v-btn>
                         </v-card-actions>
@@ -136,7 +84,7 @@
     </v-img>
     <v-container vertical-align:middle class="text-center">
       <h2 class="display-2 font-weight-bold mb-3">ABOUT US</h2>
-      <img src="./Pictures/microsleep.png" alt="microsleepLogo" width="15%"/>
+      <img src="./Pictures/microsleep.png" alt="microsleepLogo" width="15%" />
 
       <v-responsive class="mx-auto mb-8" width="56">
         <v-divider class="mb-1"></v-divider>
@@ -144,16 +92,19 @@
         <v-divider></v-divider>
       </v-responsive>
 
-      <v-responsive
-      
-        class="mx-auto title font-weight-light mb-8"
-        max-width="720"
-      >
-        Microsleep is an organization that helps students find safe and convenient 
-        housing. On nights where students have been out late or find it inconvenient
-        to commute, Microsleep provides an answer through temporary housing. Furthermore, 
-        Microsleep is also a great way to network and help the community. Our goal is to improve 
+      <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
+        Microsleep is an organization that helps students find safe and convenient
+        housing, made especially for upperclassmen that are forced off-campus. 
+        Microsleep helps low-income students find housing that may be traditionally unaffordable. 
+        On nights where students have been out late or find it inconvenient
+        to commute, Microsleep provides an answer through temporary housing. Furthermore,
+        Microsleep is also a great way to network and help the community. Our goal is to improve
         student convenience, health, and safety, along with promoting a more inclusive community.
+      </v-responsive>
+
+      <v-responsive class="mx-auto font-weight-light mb-1" max-width="720">
+        Disclaimer: You are responsible for your own safety and assumption of risk. Please take all necessary precautions
+        when using Microsleep.
       </v-responsive>
 
       <!-- <v-avatar class="elevation-12 mb-12" size="128">
@@ -163,25 +114,15 @@
       <div></div>
     </v-container>
 
-    <v-parallax
-      class="text-center"
-      :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
-      style="width: 100%"
-      src="https://i.pinimg.com/originals/cf/5e/69/cf5e6918e081661af74b4094bf128e29.jpg"
-    >
+    <v-parallax class="text-center" :height="$vuetify.breakpoint.smAndDown ? 700 : 500" style="width: 100%"
+      src="https://i.pinimg.com/originals/cf/5e/69/cf5e6918e081661af74b4094bf128e29.jpg">
       <v-container fill-height class="text-center">
         <v-row class="mx-auto">
           <v-col v-for="[value, title] of stats" :key="title" cols="12" md="3">
             <div class="text-center">
-              <div
-                class="display-3 font-weight-black mb-4"
-                v-text="value"
-              ></div>
+              <div class="display-3 font-weight-black mb-4" v-text="value"></div>
 
-              <div
-                class="title font-weight-regular text-uppercase"
-                v-text="title"
-              ></div>
+              <div class="title font-weight-regular text-uppercase" v-text="title"></div>
             </div>
           </v-col>
         </v-row>
@@ -196,7 +137,7 @@ export default {
     return {
       stats: [
         ["100+", "Housing Rooms"],
-        ["5+", "Partnered Schools"],
+        ["5+", "School Locations"],
         ["2000+", "Bookings"],
         ["5000+", "Current Users"],
       ],
@@ -217,9 +158,9 @@ export default {
 
 .fancy-border {
   border: 25px solid #b88846;
-  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='75' height='75'%3E%3Cg fill='none' stroke='%23B88846' stroke-width='2'%3E%3Cpath d='M1 1h73v73H1z'/%3E%3Cpath d='M8 8h59v59H8z'/%3E%3Cpath d='M8 8h16v16H8zM51 8h16v16H51zM51 51h16v16H51zM8 51h16v16H8z'/%3E%3C/g%3E%3Cg fill='%23B88846'%3E%3Ccircle cx='16' cy='16' r='2'/%3E%3Ccircle cx='59' cy='16' r='2'/%3E%3Ccircle cx='59' cy='59' r='2'/%3E%3Ccircle cx='16' cy='59' r='2'/%3E%3C/g%3E%3C/svg%3E")
-    25;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='75' height='75'%3E%3Cg fill='none' stroke='%23B88846' stroke-width='2'%3E%3Cpath d='M1 1h73v73H1z'/%3E%3Cpath d='M8 8h59v59H8z'/%3E%3Cpath d='M8 8h16v16H8zM51 8h16v16H51zM51 51h16v16H51zM8 51h16v16H8z'/%3E%3C/g%3E%3Cg fill='%23B88846'%3E%3Ccircle cx='16' cy='16' r='2'/%3E%3Ccircle cx='59' cy='16' r='2'/%3E%3Ccircle cx='59' cy='59' r='2'/%3E%3Ccircle cx='16' cy='59' r='2'/%3E%3C/g%3E%3C/svg%3E") 25;
 }
+
 .transparent {
   background-color: rgba(255, 255, 255, 0.7);
 }

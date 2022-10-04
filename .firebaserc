@@ -1,8 +1,9 @@
 {
   "projects": {
     "msj-tutor": "msj-tutor",
-    "default": "msj-tutor",
-    "microsleep": "microsleep-67"
+    "default": "microsleep-67",
+    "microsleep": "microsleep-67",
+    "Microsleep": "microsleep-67"
   },
   "targets": {
     "msj-tutor": {
